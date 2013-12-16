@@ -55,13 +55,17 @@ function eventCallback(response) {
       out += '---------\n';
     }
     
-    widgetOut += (response[i].email + '<BR>');
-    widgetOut += ('Time: ' + calendarEventsCount + 'h' + '<BR>');
+    // Add a calendar time count entry only if we have more then 0 accounted time
+    if (calendarEventsCount > 0) {
+        widgetOut += (response[i].email + '<BR>');
+        widgetOut += ('Time: ' + calendarEventsCount + 'h' + '<BR>');
+    }
   }
   //alert(out);
   
   var elem = document.getElementById('numberOfHours');
   elem.innerHTML = widgetOut;
+  gadgets.window.adjustHeight();
 }
 
 function getFirstWeekDay() {

@@ -1,7 +1,8 @@
 <Module>
-  <ModulePrefs title="Timesheet" height="100" author="Google"
+  <ModulePrefs title="Time count" height="100" author="Google"
      author_email="sysinfo@telica.ca">
-    <Optional feature="google.calendar-0.5.read"/>
+    <Require feature="google.calendar-0.5.read"/>
+    <Require feature="dynamic-height"/>
 </ModulePrefs>
   <Content type="html"><![CDATA[
   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
@@ -11,10 +12,7 @@
         <script src="https://rawgithub.com/jrosesol/calendar_widget/master/timesheet.js" language="javascript" type="text/javascript"></script>
     </head>
     <body>
-        <script language="javascript">
-        </script>
-        <div id='numberOfHours'>HOURS</div>
-        <!-- <button onclick="refresh()">Reload</button> -->
+        <div id='numberOfHours'>Loading...</div>
     </body>
     </html>
   ]]></Content>
