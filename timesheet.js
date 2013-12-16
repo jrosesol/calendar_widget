@@ -55,9 +55,8 @@ function eventCallback(response) {
       out += '---------\n';
     }
     
-    widgetOut += response[i].email;
-    widgetOut += '<BR>';
-    widgetOut += ('Time: ' + calendarEventsCount + 'h');
+    widgetOut += (response[i].email + '<BR>');
+    widgetOut += ('Time: ' + calendarEventsCount + 'h' + '<BR>');
   }
   //alert(out);
   
