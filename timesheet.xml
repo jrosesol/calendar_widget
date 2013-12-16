@@ -1,0 +1,21 @@
+<Module>
+  <ModulePrefs title="Timesheet" height="100" author="Google"
+     author_email="sysinfo@telica.ca">
+    <Optional feature="google.calendar-0.5.read"/>
+</ModulePrefs>
+  <Content type="html"><![CDATA[
+  <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+  "http://www.w3.org/TR/html4/strict.dtd">
+    <html>
+    <head>
+        <script src="https://bitbucket.org/jrosesol/simplesheet/raw/f905102d7b5b665dd904b16ff8e78438040bcb72/calendar.gadget/timesheet.js" language="javascript" type="text/javascript"></script>
+    </head>
+    <body>
+        <script language="javascript">
+        </script>
+        <div id='numberOfHours'>HOURS</div>
+        <!-- <button onclick="refresh()">Reload</button> -->
+    </body>
+    </html>
+  ]]></Content>
+</Module>

@@ -1,0 +1,115 @@
+/**
+* Used to asynchrously request user data to Google Calendar.
+*/
+function run() {
+  var firstWeekDay = getFirstWeekDay();
+  var lastWeekDay = getLastWeekDay(firstWeekDay);
+  var startDate = {year: firstWeekDay.getFullYear(), month: firstWeekDay.getMonth(), date : firstWeekDay.getDate(),
+                   hour : 0, minute: 0, second: 0};
+  var endDate = {year: lastWeekDay.getFullYear(), month: lastWeekDay.getMonth(), date : lastWeekDay.getDate(),
+                 hour : 0, minute: 0, second: 0};
+
+  //var calendars = ['en.usa#holiday@group.v.calendar.google.com',
+  //    'en.canadian#holiday@group.v.calendar.google.com'];
+
+  google.calendar.read.getEvents(eventCallback, 'selected', startDate, endDate);
+  
+}
+
+function refresh() {
+    window.setInterval(run, 1000);
+}
+
+function eventCallback(response) {
+  var out = '';
+  var timeCount = 0.0;
+  for (var i = 0; i < response.length; ++i) {
+    if ('error' in response[i]) {
+      out += 'Can\'t load calendar for ' + response[i].email + '\n';
+      continue;
+    }
+
+    out += 'CALENDAR: ' + response[i].email + '\n';
+    if ('name' in response[i]) {
+      out += 'NAME: ' + response[i].name + '\n';
+    }
+
+    var events = response[i]['events'];
+    for(var j = 0; j < events.length; ++j) {
+      var e = events[j];
+      if ('title' in e) {
+        out += 'Title = ' + e.title + '\n';
+      }
+      if ('location' in e) {
+        out += 'Location = ' + e.location + '\n';
+      }
+      if ('startTime' in e) {
+        out += 'Duration = ' + ((e.endTime.hour - e.startTime.hour) + ((e.endTime.minute - e.startTime.minute)/60.0)) + '\n';
+        timeCount += ((e.endTime.hour - e.startTime.hour) + ((e.endTime.minute - e.startTime.minute)/60.0));
+      }
+      out += '---------\n';
+    }
+  }
+  //alert(out);
+  
+  var elem = document.getElementById('numberOfHours');
+  elem.innerHTML = 'Total : ' + timeCount + 'h';
+}
+
+function getFirstWeekDay() {
+    var today = new Date();
+    var day = today.getDate();
+    var month = today.getMonth() + 1;
+    var year = today.getYear();
+    if (year < 2000)
+    year = year + 1900;
+    var offset = today.getDay();
+    var week;
+
+    if(offset != 0) {
+    day = day - offset;
+    if ( day < 1) {
+    if ( month == 1) day = 31 + day;
+    if (month == 2) day = 31 + day;
+    if (month == 3) {
+    if (( year == 00) || ( year == 04)) {
+    day = 29 + day;
+    }
+    else {
+    day = 28 + day;
+       }
+    }
+    if (month == 4) day = 31 + day;
+    if (month == 5) day = 30 + day;
+    if (month == 6) day = 31 + day;
+    if (month == 7) day = 30 + day;
+    if (month == 8) day = 31 + day;
+    if (month == 9) day = 31 + day;
+    if (month == 10) day = 30 + day;
+    if (month == 11) day = 31 + day;
+    if (month == 12) day = 30 + day;
+    if (month == 1) {
+    month = 12;
+    year = year - 1;
+    }
+    else {
+    month = month - 1;
+          }
+       }
+    }
+    
+    var firstWeekDayOnSunday = new Date(year, month, day);
+    var firstWeekDayOnMonday = new Date(firstWeekDayOnSunday + 1);
+    
+    return firstWeekDayOnMonday;
+}
+
+function getLastWeekDay(firstWeekDay) {
+    var lastWeekDay = new Date(firstWeekDay);
+    lastWeekDay.setDate(lastWeekDay.getDate() + 6);
+    
+    return lastWeekDay;
+}
+
+// Compute the time on startup
+document.body.onload = function() {refresh();}
