@@ -59,7 +59,7 @@ function eventCallback(response) {
 function getFirstWeekDay() {
     var today = new Date();
     var day = today.getDate();
-    var month = today.getMonth() + 1;
+    var month = today.getMonth();
     var year = today.getYear();
     if (year < 2000)
     year = year + 1900;
@@ -67,39 +67,39 @@ function getFirstWeekDay() {
     var week;
 
     if(offset != 0) {
-    day = day - offset;
-    if ( day < 1) {
-    if ( month == 1) day = 31 + day;
-    if (month == 2) day = 31 + day;
-    if (month == 3) {
-    if (( year == 00) || ( year == 04)) {
-    day = 29 + day;
-    }
-    else {
-    day = 28 + day;
-       }
-    }
-    if (month == 4) day = 31 + day;
-    if (month == 5) day = 30 + day;
-    if (month == 6) day = 31 + day;
-    if (month == 7) day = 30 + day;
-    if (month == 8) day = 31 + day;
-    if (month == 9) day = 31 + day;
-    if (month == 10) day = 30 + day;
-    if (month == 11) day = 31 + day;
-    if (month == 12) day = 30 + day;
-    if (month == 1) {
-    month = 12;
-    year = year - 1;
-    }
-    else {
-    month = month - 1;
-          }
-       }
+        day = day - offset;
+        if ( day < 1) {
+            if ( month == 1) day = 31 + day;
+            if (month == 2) day = 31 + day;
+            if (month == 3) {
+            if (( year == 00) || ( year == 04)) {
+            day = 29 + day;
+            }
+            else {
+            day = 28 + day;
+               }
+            }
+            if (month == 4) day = 31 + day;
+            if (month == 5) day = 30 + day;
+            if (month == 6) day = 31 + day;
+            if (month == 7) day = 30 + day;
+            if (month == 8) day = 31 + day;
+            if (month == 9) day = 31 + day;
+            if (month == 10) day = 30 + day;
+            if (month == 11) day = 31 + day;
+            if (month == 12) day = 30 + day;
+            
+            if (month == 1) {
+                month = 12;
+                year = year - 1;
+            }
+            else {
+                month = month - 1;
+                }
+        }
     }
     
-    var firstWeekDayOnSunday = new Date(year, month, day);
-    var firstWeekDayOnMonday = new Date(firstWeekDayOnSunday + 1);
+    var firstWeekDayOnMonday = new Date(year, month, day + 1);
     
     return firstWeekDayOnMonday;
 }
