@@ -4,9 +4,9 @@
 function run() {
   var firstWeekDay = getFirstWeekDay();
   var lastWeekDay = getLastWeekDay(firstWeekDay);
-  var startDate = {year: firstWeekDay.getFullYear(), month: firstWeekDay.getMonth(), date : firstWeekDay.getDate(),
+  var startDate = {year: firstWeekDay.getFullYear(), month: (firstWeekDay.getMonth() + 1), date : firstWeekDay.getDate(),
                    hour : 0, minute: 0, second: 0};
-  var endDate = {year: lastWeekDay.getFullYear(), month: lastWeekDay.getMonth(), date : lastWeekDay.getDate(),
+  var endDate = {year: lastWeekDay.getFullYear(), month: (lastWeekDay.getMonth() + 1), date : lastWeekDay.getDate(),
                  hour : 0, minute: 0, second: 0};
 
   //var calendars = ['en.usa#holiday@group.v.calendar.google.com',
@@ -44,8 +44,10 @@ function eventCallback(response) {
         out += 'Location = ' + e.location + '\n';
       }
       if ('startTime' in e) {
-        out += 'Duration = ' + ((e.endTime.hour - e.startTime.hour) + ((e.endTime.minute - e.startTime.minute)/60.0)) + '\n';
-        timeCount += ((e.endTime.hour - e.startTime.hour) + ((e.endTime.minute - e.startTime.minute)/60.0));
+        if (!e.allDay) {
+            out += 'Duration = ' + ((e.endTime.hour - e.startTime.hour) + ((e.endTime.minute - e.startTime.minute)/60.0)) + '\n';
+            timeCount += ((e.endTime.hour - e.startTime.hour) + ((e.endTime.minute - e.startTime.minute)/60.0));
+        }
       }
       out += '---------\n';
     }
