@@ -22,6 +22,7 @@ function refresh() {
 
 function eventCallback(response) {
   var out = '';
+  var widgetOut = '';
   var timeCount = 0.0;
   for (var i = 0; i < response.length; ++i) {
     if ('error' in response[i]) {
@@ -35,6 +36,7 @@ function eventCallback(response) {
     }
 
     var events = response[i]['events'];
+    var calendarEventsCount = 0;
     for(var j = 0; j < events.length; ++j) {
       var e = events[j];
       if ('title' in e) {
@@ -47,15 +49,20 @@ function eventCallback(response) {
         if (!e.allDay) {
             out += 'Duration = ' + ((e.endTime.hour - e.startTime.hour) + ((e.endTime.minute - e.startTime.minute)/60.0)) + '\n';
             timeCount += ((e.endTime.hour - e.startTime.hour) + ((e.endTime.minute - e.startTime.minute)/60.0));
+            calendarEventsCount += ((e.endTime.hour - e.startTime.hour) + ((e.endTime.minute - e.startTime.minute)/60.0));
         }
       }
       out += '---------\n';
     }
+    
+    widgetOut += response[i].email;
+    widgetOut += '<BR>';
+    widgetOut += ('Time: ' + calendarEventsCount + 'h');
   }
   //alert(out);
   
   var elem = document.getElementById('numberOfHours');
-  elem.innerHTML = 'Total : ' + timeCount + 'h';
+  elem.innerHTML = widgetOut;
 }
 
 function getFirstWeekDay() {
