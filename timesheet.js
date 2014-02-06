@@ -84,7 +84,7 @@ function eventCallback(response) {
 }
 
 function getFirstWeekDay() {
-    var today = firstWeekdayDisp;
+    var today = new Date(firstWeekdayDisp.year, firstWeekdayDisp.month, firstWeekdayDisp.date, 0,0,0);
     var day = today.getDate();
     var month = today.getMonth();
     var year = today.getYear();
