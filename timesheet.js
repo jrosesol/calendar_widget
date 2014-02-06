@@ -129,8 +129,8 @@ function getFirstWeekDay() {
 }
 
 function getLastWeekDay(firstWeekDay) {
-    var lastWeekDay = new Date(firstWeekDay);
-    lastWeekDay.setDate(lastWeekDay.getDate() + 6);
+    var lastWeekDay = new Date(lastWeekdayDisp.year, lastWeekdayDisp.month, lastWeekdayDisp.date, 0,0,0);
+    //lastWeekDay.setDate(lastWeekDay.getDate() + 6);
     
     return lastWeekDay;
 }
