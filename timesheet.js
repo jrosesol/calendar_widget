@@ -16,12 +16,17 @@ function run() {
   
 }
 
+/*
+ This is used to set the first and last day displayed
+*/
+var firstWeekdayDisp = null;
+var lastWeekdayDisp = null;
 function datesCallback(dates) {
-  var start = dates.startTime;
-  var end = dates.endTime;
+  firstWeekdayDisp = dates.startTime;
+  lastWeekdayDisp = dates.endTime;
 
-  var out = start.month + '/' + start.date + ' - ' +
-      end.month + '/' + end.date;
+  var out = firstWeekdayDisp.month + '/' + firstWeekdayDisp.date + ' - ' +
+      lastWeekdayDisp.month + '/' + lastWeekdayDisp.date;
   alert(out);
 }
 
@@ -79,7 +84,7 @@ function eventCallback(response) {
 }
 
 function getFirstWeekDay() {
-    var today = new Date();
+    var today = firstWeekdayDisp;
     var day = today.getDate();
     var month = today.getMonth();
     var year = today.getYear();
