@@ -4,9 +4,9 @@
 function run() {
   var firstWeekDay = getFirstWeekDay();
   var lastWeekDay = getLastWeekDay(firstWeekDay);
-  var startDate = {year: firstWeekDay.getFullYear(), month: (firstWeekDay.getMonth() + 1), date : firstWeekDay.getDate(),
+  var startDate = {year: firstWeekDay.getFullYear(), month: firstWeekDay.getMonth(), date : firstWeekDay.getDate(),
                    hour : 0, minute: 0, second: 0};
-  var endDate = {year: lastWeekDay.getFullYear(), month: (lastWeekDay.getMonth() + 1), date : lastWeekDay.getDate(),
+  var endDate = {year: lastWeekDay.getFullYear(), month: lastWeekDay.getMonth(), date : lastWeekDay.getDate(),
                  hour : 0, minute: 0, second: 0};
 
   //var calendars = ['en.usa#holiday@group.v.calendar.google.com',
