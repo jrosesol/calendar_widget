@@ -16,7 +16,17 @@ function run() {
   
 }
 
+function datesCallback(dates) {
+  var start = dates.startTime;
+  var end = dates.endTime;
+
+  var out = start.month + '/' + start.date + ' - ' +
+      end.month + '/' + end.date;
+  alert(out);
+}
+
 function refresh() {
+    google.calendar.subscribeToDates(datesCallback);
     window.setInterval(run, 1000);
 }
 
