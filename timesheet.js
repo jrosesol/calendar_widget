@@ -25,9 +25,6 @@ function datesCallback(dates) {
   firstWeekdayDisp = dates.startTime;
   lastWeekdayDisp = dates.endTime;
 
-  var out = firstWeekdayDisp.month + '/' + firstWeekdayDisp.date + ' - ' +
-      lastWeekdayDisp.month + '/' + lastWeekdayDisp.date;
-  alert(out);
 }
 
 function refresh() {
