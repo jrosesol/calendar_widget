@@ -35,7 +35,7 @@ function refresh() {
 function eventCallback(response) {
   var out = '';
   var widgetOut = '';
-  var timeCount = 0.0;
+  //var timeCount = 0.0;
   for (var i = 0; i < response.length; ++i) {
     if ('error' in response[i]) {
       out += 'Can\'t load calendar for ' + response[i].email + '\n';
@@ -60,8 +60,12 @@ function eventCallback(response) {
       if ('startTime' in e) {
         if (!e.allDay) {
             out += 'Duration = ' + ((e.endTime.hour - e.startTime.hour) + ((e.endTime.minute - e.startTime.minute)/60.0)) + '\n';
-            timeCount += ((e.endTime.hour - e.startTime.hour) + ((e.endTime.minute - e.startTime.minute)/60.0));
-            calendarEventsCount += ((e.endTime.hour - e.startTime.hour) + ((e.endTime.minute - e.startTime.minute)/60.0));
+            //timeCount += ((e.endTime.hour - e.startTime.hour) + ((e.endTime.minute - e.startTime.minute)/60.0));
+            
+            var startTime = new Date(e.startTime.year, e.startTime.month, e.startTime.date, e.startTime.hour, e.startTime.minute, e.startTime.second);
+            var endTime = new Date(e.endTime.year, e.endTime.month, e.endTime.date, e.endTime.hour, e.endTime.minute, e.endTime.second)
+            calendarEventsCount += Math.abs(endTime.getTime() - startTime.getTime())/1000/60/60;
+            //calendarEventsCount += ((e.endTime.hour - e.startTime.hour) + ((e.endTime.minute - e.startTime.minute)/60.0));
         }
       }
       out += '---------\n';
