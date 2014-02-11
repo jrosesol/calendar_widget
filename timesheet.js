@@ -4,10 +4,10 @@
 function run() {
   var firstWeekDay = getFirstWeekDay();
   var lastWeekDay = getLastWeekDay(firstWeekDay);
-  var startDate = {year: firstWeekDay.getFullYear(), month: firstWeekDay.getMonth(), date : firstWeekDay.getDate(),
+  var startDate = {year: firstWeekDay.getFullYear(), month: firstWeekDay.getMonth() + 1, date : firstWeekDay.getDate(),
                    hour : 0, minute: 0, second: 0};
-  var endDate = {year: lastWeekDay.getFullYear(), month: lastWeekDay.getMonth(), date : lastWeekDay.getDate(),
-                 hour : 0, minute: 0, second: 0};
+  var endDate = {year: lastWeekDay.getFullYear(), month: lastWeekDay.getMonth() + 1, date : lastWeekDay.getDate(),
+                 hour : 23, minute: 59, second: 59};
 
   //var calendars = ['en.usa#holiday@group.v.calendar.google.com',
   //    'en.canadian#holiday@group.v.calendar.google.com'];
@@ -89,49 +89,45 @@ function eventCallback(response) {
 }
 
 function getFirstWeekDay() {
-    var today = new Date(firstWeekdayDisp.year, firstWeekdayDisp.month, firstWeekdayDisp.date, 0,0,0);
+    // Google month goes from 1-12 but JS Data is 0..11
+    var today = new Date(firstWeekdayDisp.year, firstWeekdayDisp.month - 1, firstWeekdayDisp.date, 0,0,0);
     var day = today.getDate();
     var month = today.getMonth();
     var year = today.getYear();
-    if (year < 2000)
-    year = year + 1900;
     var offset = today.getDay();
-    var week;
 
     if(offset != 0) {
-        day = day - offset;
-        if ( day < 1) {
-            if ( month == 1) day = 31 + day;
-            if (month == 2) day = 31 + day;
-            if (month == 3) {
-            if (( year == 00) || ( year == 04)) {
+      day = day - offset;
+      
+      if ( day < 1) {
+        if (month == 0) day = 31 + day;
+        if (month == 1) day = 31 + day;
+        if (month == 2) {
+          if (( year == 00) || ( year == 04)) {
             day = 29 + day;
-            }
-            else {
+          } else {
             day = 28 + day;
-               }
-            }
-            if (month == 4) day = 31 + day;
-            if (month == 5) day = 30 + day;
-            if (month == 6) day = 31 + day;
-            if (month == 7) day = 30 + day;
-            if (month == 8) day = 31 + day;
-            if (month == 9) day = 31 + day;
-            if (month == 10) day = 30 + day;
-            if (month == 11) day = 31 + day;
-            if (month == 12) day = 30 + day;
-            
-            if (month == 1) {
-                month = 12;
-                year = year - 1;
-            }
-            else {
-                month = month - 1;
-                }
+          }
         }
+        if (month == 3) day = 31 + day;
+        if (month == 4) day = 30 + day;
+        if (month == 5) day = 31 + day;
+        if (month == 6) day = 30 + day;
+        if (month == 7) day = 31 + day;
+        if (month == 8) day = 31 + day;
+        if (month == 9) day = 30 + day;
+        if (month == 10) day = 31 + day;
+        if (month == 11) day = 30 + day;
+        
+        // Different year
+        if (month == 0) {
+            month = 11;
+            year = year - 1;
+        }
+      }
     }
     
-    var firstWeekDayOnMonday = new Date(year, month, day + 1);
+    var firstWeekDayOnMonday = new Date(year, month, day);
     
     return firstWeekDayOnMonday;
 }
