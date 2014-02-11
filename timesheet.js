@@ -63,10 +63,10 @@ function eventCallback(response) {
             //timeCount += ((e.endTime.hour - e.startTime.hour) + ((e.endTime.minute - e.startTime.minute)/60.0));
             
             var startTime = new Date(e.startTime.year, e.startTime.month, e.startTime.date, e.startTime.hour, e.startTime.minute, e.startTime.second);
-            var endTime = new Date(e.endTime.year, e.endTime.month, e.endTime.date, e.endTime.hour, e.endTime.minute, e.endTime.second)
+            var endTime = new Date(e.endTime.year, e.endTime.month, e.endTime.date, e.endTime.hour, e.endTime.minute, e.endTime.second);
             var eventDuration = Math.abs(endTime.getTime() - startTime.getTime())/1000/60/60;
             // Round to 6 minutes
-            eventDuration = Math.floor(eventDuration) + Math.floor(((eventDuration - Math.floor(eventDuration))*6)/0.1)/100
+            eventDuration = Math.floor(eventDuration) + Math.floor(((eventDuration - Math.floor(eventDuration))*6)/0.1)/100.0;
             calendarEventsCount += eventDuration;
             //calendarEventsCount += ((e.endTime.hour - e.startTime.hour) + ((e.endTime.minute - e.startTime.minute)/60.0));
         }
