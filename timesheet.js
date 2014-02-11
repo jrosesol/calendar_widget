@@ -90,10 +90,12 @@ function eventCallback(response) {
 
 function getFirstWeekDay() {
     // Google month goes from 1-12 but JS Data is 0..11
-    var today = new Date(firstWeekdayDisp.year, firstWeekdayDisp.month - 1, firstWeekdayDisp.date, 0,0,0);
-    var day = today.getDate();
-    var month = today.getMonth();
-    var year = today.getYear();
+    var firstCalendarDay = new Date(firstWeekdayDisp.year, firstWeekdayDisp.month - 1, firstWeekdayDisp.date, 0,0,0);
+    //var day = today.getDate();
+    //var month = today.getMonth();
+    //var year = today.getYear();
+    
+    /*
     var offset = today.getDay();
 
     if(offset != 0) {
@@ -126,10 +128,11 @@ function getFirstWeekDay() {
         }
       }
     }
+    */
     
-    var firstWeekDayOnMonday = new Date(year, month, day);
+    //var firstWeekDayOnMonday = new Date(year, month, day);
     
-    return firstWeekDayOnMonday;
+    return firstCalendarDay;
 }
 
 function getLastWeekDay(firstWeekDay) {
