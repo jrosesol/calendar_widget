@@ -67,7 +67,7 @@ function eventCallback(response) {
             var eventDuration = Math.abs(endTime.getTime() - startTime.getTime())/1000/60/60;
             // Round to 6 minutes
             //eventDuration = Math.floor(eventDuration) + Math.floor(((eventDuration - Math.floor(eventDuration))*6)/0.1)/100.0;
-            eventDuration = Math.floor(eventDuration) + Math.floor(0.5*100)/100.0;
+            eventDuration = Math.floor(eventDuration) + Math.floor((eventDuration - Math.floor(eventDuration))*100)/100.0;
             calendarEventsCount += eventDuration;
             //calendarEventsCount += ((e.endTime.hour - e.startTime.hour) + ((e.endTime.minute - e.startTime.minute)/60.0));
         }
